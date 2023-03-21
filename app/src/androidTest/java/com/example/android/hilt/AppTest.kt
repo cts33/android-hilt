@@ -26,6 +26,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.android.hilt.data.LoggerInMemoryDataSource
 import com.example.android.hilt.ui.MainActivity
 import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
 import org.hamcrest.Matchers.containsString
 import org.junit.Rule
 import org.junit.Test
@@ -34,6 +35,7 @@ import org.junit.runner.RunWith
 private const val TAG = "AppTest"
 
 @RunWith(AndroidJUnit4::class)
+@HiltAndroidTest
 class AppTest {
     @get:Rule
     var hiltRule = HiltAndroidRule(this)
