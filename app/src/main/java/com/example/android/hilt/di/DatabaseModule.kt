@@ -1,6 +1,5 @@
 package com.example.android.hilt.di
 
-import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import com.example.android.hilt.data.AppDatabase
@@ -8,8 +7,8 @@ import com.example.android.hilt.data.LogDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 /**
@@ -25,7 +24,7 @@ Hilt 模块是带有@Module 和 @InstallIn 注解的类。@Module 会告知 Hilt
 对于每个可被 Hilt 注入的 Android 类，都有一个关联的 Hilt 组件。例如，Application 容器与 ApplicationComponent 相关联，
 而 Fragment 容器与 FragmentComponent 相关联。
  */
-@InstallIn(SingletonComponent::class)
+@InstallIn(ApplicationComponent::class)
 @Module
 object DatabaseModule{
 

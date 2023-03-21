@@ -16,29 +16,50 @@
 
 package com.example.android.hilt
 
+import android.util.Log
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
+import com.example.android.hilt.data.LoggerInMemoryDataSource
 import com.example.android.hilt.ui.MainActivity
+import dagger.hilt.android.testing.HiltAndroidRule
 import org.hamcrest.Matchers.containsString
-import org.junit.After
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+private const val TAG = "AppTest"
+
 @RunWith(AndroidJUnit4::class)
 class AppTest {
-
-//    @After
+    @get:Rule
+    var hiltRule = HiltAndroidRule(this)
+    //    @After
 //    fun tearDown() {
 //        // Remove logs after the test finishes
 //        ServiceLocator(getInstrumentation().targetContext).loggerLocalDataSource.removeLogs()
 //    }
+    @Test
+    fun testAddData() {
+        val logger = LoggerInMemoryDataSource()
+        logger.addLog("log.hashcode=${logger.hashCode()}")
+    }
+
+    @Test
+    fun testGetAllData() {
+        val logger = LoggerInMemoryDataSource()
+        logger.addLog("log.hashcode=${logger.hashCode()}")
+        logger.getAllLogs {
+            for (item in it) {
+                Log.d(TAG, "testGetAllData: ")
+                println("testGetAllData: $item")
+            }
+        }
+//       logger.removeLogs()
+    }
 
     @Test
     fun happyPath() {

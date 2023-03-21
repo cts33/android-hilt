@@ -7,8 +7,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.scopes.ActivityScoped
-import dagger.hilt.components.SingletonComponent
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
@@ -24,7 +24,7 @@ annotation class InMemoryLogger
 @Qualifier
 annotation class DatabaseLogger
 
-@InstallIn(SingletonComponent::class)
+@InstallIn(ApplicationComponent::class)
 @Module
 abstract class LoggingDatabaseModule {
 
